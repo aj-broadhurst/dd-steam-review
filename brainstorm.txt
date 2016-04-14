@@ -1,31 +1,51 @@
 Game
 	gameID
+	gameName
 User
 	userID (steam id)
 	userName
 	userLevel
-	userGames
+	userProducts
 	userReviews
 	userEmail
-	userPasswordSaltHash
+	userSalt
+	userHash
 Review
+	reviewID
 	reviewText
 	reviewDate
-	reviewID
-	reviewTotalHours
 	reviewRecommendation
 	userID
+	gameID
 Comment
+	commentID
 	commentText
 	commentDate
 	userID
-Rating?
-	ratingHelpful
+Rating
+	ratingHelpfulness
 	userID
-Media?
-	Avatar?
+	reviewID
 
-Persona example template see pwp milestones examples expand further
+RELATIONS
+user-to-review				1-to-n	users can write many reviews (for different games)
+review-to-comment			1-to-n 	reviews can have many comments
+review-to-rating			m-to-n	reviews can have many ratings
+user-to-comment			1-to-n	users can make many comments
+game-to-review				1-to-n	games can have many reviews
+user-to-rating				m-to-n	users can only choose 1 rating, but they can rate many games, change their mind, etc
+
+USE CASES
+Goal: User wants to write a review.		User accesses game storefront by accessing Steam at https://store.steampowered.com . User can then login, by clicking 'login' in the very top right corner.  On the following screen, the user can enter their username and password.  Depending on their SteamGuard settings, they may need to enter a verification code on a prompt; the code is sent either to their email or the Steam app on their phone. Once they are logged in, they are returned to the 'Featured Items' page.
+ The search bar is in the upper right-hand corner of the page.  writes the text for the review and chooses a recommendation, either 'Yes' or 'No', and hits 'Post Review.'
+
+Goal: User wants to read/interact with reviews.		User accesses game storefront, scrolls down to review selection, and can read reviews.  User may rate how helpful the reviews were with 3 options, being 'Yes,' 'No,' and 'Funny.' User may also comment on the reviews by selecting the comment bubble.
+
+
+
+
+PERSONA
+
 Name: Alexander Powell
 Age: 20
 Profession: Alexander is a full-time student at the University of Colorado in Colorado Springs.  He is majoring in Game Design and Development with a minor in Visual Arts and is currently a sophomore.  He also works part time at one of the local Starbucks to help pay for school and other expenses.
@@ -33,11 +53,3 @@ Technology: Alexander built his own gaming PC, which he uses both for school wor
 Attitudes and Behaviors: Because he is a student, and is the typical trend for Steam users, Alexander tends to make most of his purchases during Steam sales.  Alexander does follow games journalism, blogs, etcetera, and thus usually knows about upcoming titles, especially in his favorite genres or by his favorite developers.  He eagerly anticipates specific titles before release, and will often purchase these titles before any sort of major price drop.  For titles that he is less familiar with, the content on the games' store page is usually the largest deciding factor.
 Frustrations and Needs: Alexander uses game storefronts to finalize impulse purchase and fully understand his purchases.  Alexander needs to be able to use the reviews to make an informed decision about games he is very familiar with, or games he knows very little about.
 Goals: Alex wants to know a few things, is he getting the most bang for his buck? And will he enjoy playing this game? He likes to find other users who know what they are talking about, and who play the same kind of games that he likes.
-
-Your persona should feature the following at minimum:
-Name
-A detailed description that includes demographic information such as: age, job or role, relevant technology being used, behaviors and attitudes, and the situation or scenario in which they will using your site.
-Goal(s) regarding the use of your site.
-Additional information regarding your persona may also include:
-Frustrations your persona may be facing.
-Additional information your persona may need in order to achieve their goal.
