@@ -6,10 +6,15 @@
 	</head>
 	<body>
 		<header>
-			<h1>Data Design Project: Steam Game Storefront Review Section</h1>
+			<h1>Data Design Project:</h1>
+			<h2> Steam Game Storefront Review Section</h2>
+			<p>Phase 1 for the Data Design Project</p>
 		</header>
 		<main>
-		<h2>Backend Setup</h2>
+		<h2>Frontend</h2>
+			<h3>Persona</h3>
+			<h3>Use Cases</h3>
+		<h2>Backend</h2>
 			<h3>Attributes and Entities</h3>
 			<h4>Game</h4>
 			<ul>
@@ -35,16 +40,21 @@
 				<li>reviewRecommendation</li>
 				<li>userID</li>
 				<li>gameID</li>
-			</ul>>
-			Comment
-			commentID
-			commentText
-			commentDate
-			userID
-			Rating
-			ratingHelpfulness
-			userID
-			reviewID
+			</ul>
+			<h4>Comment</h4>
+				<ul>
+					<li>commentID</li>
+					<li>commentText</li>
+					<li>commentDate</li>
+					<li>userID</li>
+				</ul>
+			<h4>Rating</h4>
+				<ul>
+					<li>ratingHelpfulness</li>
+					<li>userID</li>
+					<li>reviewID</li>
+				</ul>
+			<h3>Relations</h3>
 		</main>
 	</body>
 </html> 
