@@ -1,0 +1,39 @@
+Game
+	gameID
+User
+	userID (steam id)
+	userName
+	userLevel
+Review
+	reviewText
+	reviewDate
+	reviewID
+	reviewTotalHours
+	reviewRecommendation
+	userID
+Comment
+	commentText
+	commentDate
+	userID
+Rating?
+	Attribute
+Media?
+
+Avatar?
+
+Persona example template see pwp milestones examples expand further
+Name: Alexander
+Age: 20
+Profession: full-time student, works part time. (expand)
+Technology: gaming pc, android device. (expand)
+Attitudes and Behaviors: purchases most games during sales.  Eagerly anticipates specific titles before release, will purchase anticipated titles before any sort of major price drop.
+Frustrations and Needs:
+Goals: informed decision about games that are unfamiliar, looking for other users of a similar profile who review.
+
+Your persona should feature the following at minimum:
+Name
+A detailed description that includes demographic information such as: age, job or role, relevant technology being used, behaviors and attitudes, and the situation or scenario in which they will using your site.
+Goal(s) regarding the use of your site.
+Additional information regarding your persona may also include:
+Frustrations your persona may be facing.
+Additional information your persona may need in order to achieve their goal.
