@@ -21,6 +21,14 @@
 				<b>Frustrations and Needs</b>: Alexander uses game storefronts to finalize impulse purchase and fully understand his purchases.  Alexander needs to be able to use the reviews to make an informed decision about games he is very familiar with, or games he knows very little about.<br>
 				<b>Goals</b>: Alex wants to know a few things, is he getting the most bang for his buck? And will he enjoy playing this game? He likes to find other users who know what they are talking about, and who play the same kind of games that he likes.</p>
 			<h3>Use Cases</h3>
+			<p><b>Use Case 1:</b>Text</p>
+			<ol>
+				<li>text</li>
+			</ol>
+			<p><b>Use Case 2:</b>Text</p>
+			<ol>
+				<li>Text</li>
+			</ol>
 		<h2>Backend</h2>
 			<h3>Attributes and Entities</h3>
 			<h4>Game</h4>
