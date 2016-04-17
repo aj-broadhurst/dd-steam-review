@@ -21,7 +21,7 @@
 				<b>Technology</b>: Alexander built his own gaming PC, which he uses both for school work, as well as all his PC gaming. His PC is not extreme top-of-the-line, but all the components are from mid-high tiers.  Alexander also has an android phone, a LG G4.  He has the Steam app installed and uses the two-factor authentication features that are available.<br>
 				<b>Attitudes and Behaviors</b>: Because he is a student, and as is the typical trend for Steam users, Alexander tends to make most of his purchases during Steam sales.  Alexander does follow games journalism, blogs, etcetera, and thus usually knows about upcoming titles, especially in his favorite genres or by his favorite developers.  He eagerly anticipates specific titles before release, and will often purchase these titles before any sort of major price drop.  For titles that he is less familiar with, the content on the games' store page is usually the largest deciding factor.<br>
 				<b>Frustrations and Needs</b>: Alexander uses game storefronts to finalize impulse purchase and fully understand his purchases.  Alexander needs to be able to use the reviews to make an informed decision about games he is very familiar with, or games he knows very little about.<br>
-				<b>Goals</b>: Alex wants to know a few things, is he getting the most bang for his buck? And will he enjoy playing this game? He likes to find other users who know what they are talking about, and who play the same kind of games that he likes.</p>
+				<b>Goals</b>: Alexander wants to know a few things, is he getting the most bang for his buck? And will he enjoy playing this game? He likes to find other users who know what they are talking about, and who play the same kind of games that he likes.</p>
 			<h4>Use Cases</h4>
 			<p><b>Use Case 1: </b>Goal - User wants to write a review:</p>
 			<ol>
@@ -38,7 +38,7 @@
 				<li>Alexander is browsing the featured items on the Steam homepage at <a href = "https://store.steampowered.com">https://store.steampowered.com</a> </li>
 				<li>Since Alexander is already logged in, he has all the rights granted to a Steam user, and doesn't need to log-in again.</li>
 				<li>He recalls a game he heard about a few months back, and believes it was recently released. He types what he remembers of the title into the search bar in the upper right hand corner of the page. 'Hyper Light'</li>
-				<li>Because he isn't sure on the full title, he presses 'Enter' instead of selecting a game from the drop-down list, in order to get a full look at all the possible titles. 'Hyper Light Drifer' is the first title in the list, the only title containing those words, and the icon looks correct; therefore Alexander selects it and proceeds to the storefront.</li>
+				<li>Because he isn't sure on the full title, he presses 'Enter' instead of selecting a game from the drop-down list, in order to get a full look at all the possible titles. 'Hyper Light Drifter' is the first title in the list, the only title containing those words, and the icon looks correct; therefore Alexander selects it and proceeds to the storefront.</li>
 				<li>He watches the trailer, reads the description, and then moves onto the reviews by scrolling towards the bottom of the game's storefront.</li>
 				<li>The reviews are initially sorted by helpfulness, with most helpful reviews being displayed first.</li>
 				<li>Alexander scrolls down the page, reading reviews as he goes.  Once he reaches the end, he clicks on 'Load More Reviews' to have more reviews loaded on the page.</li>
@@ -87,7 +87,46 @@
 					<li>reviewId</li>
 				</ul>
 			<h4>Relations</h4>
+			<table border="2">
+				<tr>
+					<th>Verbal</th>
+					<th>Algebraic</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>user-to-review</td>
+					<td>1-to-<i>n</i></td>
+					<td>Users can write many reviews (for different games).</td>
+				</tr>
+				<tr>
+					<td>review-to-comment</td>
+					<td>1-to-<i>n</i></td>
+					<td>Reviews can have many comments.</td>
+				</tr>
+				<tr>
+					<td>review-to-rating</td>
+					<td><i>m</i>-to-<i>n</i></td>
+					<td>Reviews can have many ratings.</td>
+				</tr>
+				<tr>
+					<td>user-to-comment</td>
+					<td>1-to-<i>n</i></td>
+					<td>Users can make many comments.</td>
+				</tr>
+				<tr>
+					<td>game-to-review</td>
+					<td>1-to-<i>n</i></td>
+					<td>Games can have many reviews.</td>
+				</tr>
+				<tr>
+					<td>user-to-rating</td>
+					<td><i>m</i>-to-<i>n</i></td>
+					<td>Users can only choose 1 rating, but they can rate many games.</td>
+				</tr>
+			</table>
 			<h2>Phase 2 Assignment</h2>
+			<h3>Entity Relationship Diagram</h3>
+			<h3>Data Description Language (DDL) Scripts</h3>
 		</main>
 	</body>
 </html> 
