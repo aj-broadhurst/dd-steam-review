@@ -48,6 +48,7 @@
 			</ol>
 		<h3>Backend</h3>
 			<h4>Attributes and Entities</h4>
+			<!--Full list of attributes and entities-->
 			<h5>Game</h5>
 			<ul>
 				<li>gameId</li>
@@ -88,6 +89,7 @@
 					<li>reviewId</li>
 				</ul>
 			<h4>Relations</h4>
+			<!--Relations in all forms formatted into a table-->
 			<table>
 				<tr>
 					<th>Verbal</th>
@@ -129,6 +131,7 @@
 			<h3>Entity Relationship Diagram</h3>
 			<img src="images/datadesign.svg" alt="Steam Game Review Section Entity Relationship Diagram">
 			<h3>Data Description Language (DDL) Scripts</h3>
+			<!--The data description language mySQL script formatted with HTML for display on the web.-->
 				<code>
 					DROP TABLE IF EXISTS game;<br>
 					DROP TABLE IF EXISTS user; <br>
@@ -145,11 +148,11 @@
 					<br>
 					CREATE TABLE user (<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userId INT UNSIGNED AUTO_INCREMENT NOT NULL,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userName VARCHAR(32) NOT NULL,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userEmail VARCHAR(128) NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userLevel SMALLINT(4) UNSIGNED NOT NULL,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userName VARCHAR(32) NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userProducts SMALLINT(5) UNSIGNED,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userReviews SMALLINT(4) UNSIGNED,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userEmail VARCHAR(128) NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userSalt CHAR(64),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userHash CHAR(128),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNIQUE(userEmail),<br>
@@ -159,33 +162,40 @@
 					<br>
 					CREATE TABLE review (<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewId INT UNSIGNED AUTO_INCREMENT NOT NULL,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewText VARCHAR(8000) NOT NULL,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gameId INT UNSIGNED NOT NULL,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userId INT UNSIGNED NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewDate TIMESTAMP,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewRecommendation TINYINT(1) UNSIGNED NOT NULL,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(userId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewText VARCHAR(8000) NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(gameId),<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(userId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(gameId) REFERENCES game(gameId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(reviewId)<br>
 					);<br>
 					<br>
 					CREATE TABLE comment (<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commentId INT UNSIGNED AUTO_INCREMENT NOT NULL,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commentText VARCHAR(1000) NOT NULL,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewId INT UNSIGNED NOT NULL,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userId INT UNSIGNED NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commentDate TIMESTAMP,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(userId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commentText VARCHAR(1000) NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(reviewId),<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(userId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(reviewId) REFERENCES review(reviewId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(commentId)<br>
 					);<br>
 					<br>
 					CREATE TABLE rating (<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewId INT UNSIGNED NOT NULL,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userId INT UNSIGNED NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ratingHelpfulness TINYINT(1) UNSIGNED NOT NULL,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(userId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(reviewId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(userId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(reviewId) REFERENCES review(reviewId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(reviewId) REFERENCES review(reviewId)<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(reviewId, userId)
 					);<br>
 				</code>
 		</main>

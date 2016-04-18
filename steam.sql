@@ -13,11 +13,11 @@ CREATE TABLE game (
 
 CREATE TABLE user (
 	userId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	userName VARCHAR(32) NOT NULL,
+	userEmail VARCHAR(128) NOT NULL,
 	userLevel SMALLINT(4) UNSIGNED NOT NULL,
+	userName VARCHAR(32) NOT NULL,
 	userProducts SMALLINT(5) UNSIGNED,
 	userReviews SMALLINT(4) UNSIGNED,
-	userEmail VARCHAR(128) NOT NULL,
 	userSalt CHAR(64),
 	userHash CHAR(128),
 	UNIQUE(userEmail),
@@ -27,32 +27,38 @@ CREATE TABLE user (
 
 CREATE TABLE review (
 	reviewId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	-- need to add foreign keys to all below this line
-	reviewText VARCHAR(8000) NOT NULL,
+	gameId INT UNSIGNED NOT NULL,
+	userId INT UNSIGNED NOT NULL,
 	reviewDate TIMESTAMP,
 	reviewRecommendation TINYINT(1) UNSIGNED NOT NULL,
-	INDEX(userId),
+	reviewText VARCHAR(8000) NOT NULL,
 	INDEX(gameId),
-	FOREIGN KEY(userId) REFERENCES user(userId),
+	INDEX(userId),
 	FOREIGN KEY(gameId) REFERENCES game(gameId),
+	FOREIGN KEY(userId) REFERENCES user(userId),
 	PRIMARY KEY(reviewId)
 );
 
 CREATE TABLE comment (
 	commentId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	commentText VARCHAR(1000) NOT NULL,
+	reviewId INT UNSIGNED NOT NULL,
+	userId INT UNSIGNED NOT NULL,
 	commentDate TIMESTAMP,
-	INDEX(userId),
+	commentText VARCHAR(1000) NOT NULL,
 	INDEX(reviewId),
-	FOREIGN KEY(userId) REFERENCES user(userId),
+	INDEX(userId),
 	FOREIGN KEY(reviewId) REFERENCES review(reviewId),
+	FOREIGN KEY(userId) REFERENCES user(userId),
 	PRIMARY KEY(commentId)
 );
 
 CREATE TABLE rating (
+	reviewId INT UNSIGNED NOT NULL,
+	userId INT UNSIGNED NOT NULL,
 	ratingHelpfulness TINYINT(1) UNSIGNED NOT NULL,
-	INDEX(userId),
 	INDEX(reviewId),
+	INDEX(userId),
+	FOREIGN KEY(reviewId) REFERENCES review(reviewId),
 	FOREIGN KEY(userId) REFERENCES user(userId),
-	FOREIGN KEY(reviewId) REFERENCES review(reviewId)
+	PRIMARY KEY(reviewId, userId)
 );
