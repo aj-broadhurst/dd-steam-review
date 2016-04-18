@@ -136,47 +136,54 @@
 					DROP TABLE IF EXISTS comment; <br>
 					DROP TABLE IF EXISTS rating;<br>
 					<br>
-					CREATE TABLE game(<br>
+					CREATE TABLE game (<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gameId INT UNSIGNED AUTO_INCREMENT NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gameName VARCHAR(60) NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNIQUE(gameName),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(gameId)<br>
 					);<br>
 					<br>
-					CREATE TABLE user(<br>
+					CREATE TABLE user (<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userId INT UNSIGNED AUTO_INCREMENT NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userName VARCHAR(32) NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userLevel SMALLINT(4) UNSIGNED NOT NULL,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userProducts SMALLINT(5) UNSIGNED NOT NULL,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userProducts SMALLINT(5) UNSIGNED,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userReviews SMALLINT(4) UNSIGNED,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userEmail VARCHAR(128) NOT NULL,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userSalt,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userHash,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userSalt CHAR(64),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userHash CHAR(128),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNIQUE(userEmail),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(userName),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(userId)<br>
 					);<br>
 					<br>
-					CREATE TABLE review(<br>
+					CREATE TABLE review (<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewId INT UNSIGNED AUTO_INCREMENT NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewText VARCHAR(8000) NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewDate TIMESTAMP,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewRecommendation TINYINT(1) UNSIGNED NOT NULL,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(userId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(gameId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(gameId) REFERENCES game(gameId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(reviewId)<br>
 					);<br>
 					<br>
-					CREATE TABLE comment(<br>
+					CREATE TABLE comment (<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commentId INT UNSIGNED AUTO_INCREMENT NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commentText VARCHAR(1000) NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commentDate TIMESTAMP,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(userId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(reviewId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(reviewId) REFERENCES review(reviewId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(commentId)<br>
 					);<br>
 					<br>
-					CREATE TABLE rating(<br>
+					CREATE TABLE rating (<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ratingHelpfulness TINYINT(1) UNSIGNED NOT NULL,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(userId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(reviewId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(reviewId) REFERENCES review(reviewId)<br>
 					);<br>
