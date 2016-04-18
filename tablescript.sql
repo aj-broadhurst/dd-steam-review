@@ -18,9 +18,9 @@ CREATE TABLE user(
 	userProducts SMALLINT(5) UNSIGNED NOT NULL,
 	userReviews SMALLINT(4) UNSIGNED,
 	userEmail VARCHAR(128) NOT NULL,
-	userSalt,
-	userHash,
-	UNIQUE userEmail,
+	userSalt ,
+	userHash ,
+	UNIQUE(userEmail),
 	PRIMARY KEY userId,
 );
 

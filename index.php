@@ -152,7 +152,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userEmail VARCHAR(128) NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userSalt,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userHash,<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNIQUE userEmail,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNIQUE(userEmail),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY userId,<br>
 					);<br>
 					<br>
