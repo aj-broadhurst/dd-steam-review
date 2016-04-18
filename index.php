@@ -127,7 +127,7 @@
 			</table>
 			<h2>Phase 2 Assignment</h2>
 			<h3>Entity Relationship Diagram</h3>
-			<img src="images/dataDesign.svg" alt="Steam Game Review Section Entity Relationship Diagram">
+			<img src="images/datadesign.svg" alt="Steam Game Review Section Entity Relationship Diagram">
 			<h3>Data Description Language (DDL) Scripts</h3>
 				<code>
 					DROP TABLE IF EXISTS game;<br>
