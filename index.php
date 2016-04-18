@@ -140,7 +140,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gameId INT UNSIGNED AUTO_INCREMENT NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gameName VARCHAR(60) NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNIQUE(gameName),<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(gameId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(gameId)<br>
 					);<br>
 					<br>
 					CREATE TABLE user(<br>
@@ -153,7 +153,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userSalt,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userHash,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNIQUE(userEmail),<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY userId,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(userId)<br>
 					);<br>
 					<br>
 					CREATE TABLE review(<br>
@@ -163,7 +163,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reviewRecommendation TINYINT(1) UNSIGNED NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(gameId) REFERENCES game(gameId),<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(reviewId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(reviewId)<br>
 					);<br>
 					<br>
 					CREATE TABLE comment(<br>
@@ -172,13 +172,13 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commentDate TIMESTAMP,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(reviewId) REFERENCES review(reviewId),<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY commentId,<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(commentId)<br>
 					);<br>
 					<br>
 					CREATE TABLE rating(<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ratingHelpfulness TINYINT(1) UNSIGNED NOT NULL,<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KET(reviewId) REFERENCES review(reviewId),<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(reviewId) REFERENCES review(reviewId)<br>
 					);<br>
 				</code>
 		</main>

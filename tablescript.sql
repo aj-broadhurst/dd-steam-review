@@ -8,7 +8,7 @@ CREATE TABLE game(
 	gameId INT UNSIGNED AUTO_INCREMENT NOT NULL,
  	gameName VARCHAR(60) NOT NULL,
 	UNIQUE(gameName),
-	PRIMARY KEY(gameId),
+	PRIMARY KEY(gameId)
 );
 
 CREATE TABLE user(
@@ -21,7 +21,7 @@ CREATE TABLE user(
 	userSalt ,
 	userHash ,
 	UNIQUE(userEmail),
-	PRIMARY KEY userId,
+	PRIMARY KEY(userId)
 );
 
 CREATE TABLE review(
@@ -31,7 +31,7 @@ CREATE TABLE review(
 	reviewRecommendation TINYINT(1) UNSIGNED NOT NULL,
 	FOREIGN KEY(userId) REFERENCES user(userId),
 	FOREIGN KEY(gameId) REFERENCES game(gameId),
-	PRIMARY KEY(reviewId),
+	PRIMARY KEY(reviewId)
 );
 
 CREATE TABLE comment(
@@ -40,11 +40,11 @@ CREATE TABLE comment(
 	commentDate TIMESTAMP,
 	FOREIGN KEY(userId) REFERENCES user(userId),
 	FOREIGN KEY(reviewId) REFERENCES review(reviewId),
-	PRIMARY KEY commentId,
+	PRIMARY KEY(commentId)
 );
 
 CREATE TABLE rating(
 	ratingHelpfulness TINYINT(1) UNSIGNED NOT NULL,
 	FOREIGN KEY(userId) REFERENCES user(userId),
-	FOREIGN KET(reviewId) REFERENCES review(reviewId),
+	FOREIGN KEY(reviewId) REFERENCES review(reviewId)
 );
