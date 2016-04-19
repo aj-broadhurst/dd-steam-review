@@ -195,7 +195,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX(userId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(reviewId) REFERENCES review(reviewId),<br>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOREIGN KEY(userId) REFERENCES user(userId),<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(reviewId, userId)
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY(reviewId, userId)<br>
 					);<br>
 				</code>
 		</main>
