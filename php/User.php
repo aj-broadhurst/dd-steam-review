@@ -131,7 +131,7 @@ class User implements \JsonSerializable {
 	 * @throws \RangeException if $newUserLevel is not positive
 	 * @throws \TypeError if $newUserLevel is not an integer
 	 */
-	public function setUserLevel($newUserLevel){
+	public function setUserLevel(int $newUserLevel){
 		//verify that the user level is positive
 		if($newUserLevel <= 0){
 			throw(new \RangeException("User level is not positive"));
@@ -159,7 +159,7 @@ class User implements \JsonSerializable {
 	 */
 	public function setUserName(string $newUserName) {
 		//verify the username is valid and/or secure
-		$newUserName = trim($newUserName);
+		$newUserName = trim($newUserName);//need to leave space in the characters trimmed EDIT
 		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING);
 		if(empty($newUserName) === true){
 			throw(new \InvalidArgumentException("Username is empty or is insecure"));
@@ -190,7 +190,7 @@ class User implements \JsonSerializable {
 	 * @throws \RangeException if $newUserProducts is not positive
 	 * @throws \TypeError if $newUserProducts is not an integer
 	 */
-	public function setUserProducts($newUserProducts) {
+	public function setUserProducts(int $newUserProducts) {
 		//verify that the number of products is positive
 		if($newUserProducts <= 0) {
 			throw(new \RangeException("Number of products owned is not positive"));
@@ -216,7 +216,7 @@ class User implements \JsonSerializable {
 	 * @throws \RangeException is $newUserReviews is not positive
 	 * @throws \TypeError if $newUserProducts is not an integer
 	 */
-	public function setUserReviews($newUserReviews){
+	public function setUserReviews(int $newUserReviews){
 		//verify that the number of reviews is positive
 		if($newUserReviews <= 0) {
 			throw(new \RangeException("Review number is not positive"));
@@ -241,7 +241,7 @@ class User implements \JsonSerializable {
 	 * @param string $newUserSalt new value for user salt
 	 * @throws \RangeException if $newUserSalt is longer than 64 characters
 	 */
-	public function setUserSalt($newUserSalt) {
+	public function setUserSalt(string $newUserSalt) {
 		//verify that the hash will fit in the database
 		if(strlen($newUserSalt) > 64){
 			throw(new \RangeException("Salt is too long"));
@@ -266,7 +266,7 @@ class User implements \JsonSerializable {
 	 * @param string $newUserHash new value for user hash
 	 * @throws \RangeException is $newUserHash is longer than 128 characters
 	 */
-	public function setUserHash($newUserHash){
+	public function setUserHash(string $newUserHash){
 		//verify that the hash will fit in the database
 		if(strlen($newUserHash) > 128){
 			throw(new \RangeException("Hash is too large"));
