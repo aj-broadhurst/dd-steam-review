@@ -8,7 +8,6 @@ namespace Edu\Cnm\Abroadhurst\DdSteamReview;
  * @author Alicia Broadhurst <abroadhurst@cnm.edu>
  */
 class User implements \JsonSerializable {
-	use ValidateDate;
 	/**
 	 * user id (aka Steam id); primary key
 	 * @var int $userId
@@ -50,6 +49,46 @@ class User implements \JsonSerializable {
 	 */
 	private $userHash;
 
+	/**
+	 * constructor for user
+	 *
+	 * @param int|null $newUserId id for this user, will be null if this is a new user
+	 * @param string $newUserEmail string that contains email
+	 * @param int $newUserLevel integer of the user's level
+	 * @param string $newUserName string containing user's chosen username
+	 * @param int $newUserProducts integer of the user's products
+	 * @param int $newUserReviews integer of the user's products
+	 * @param string $newUserSalt string containing salt for user password
+	 * @param string $newUserHash string containing hash for user password
+	 * @throws \InvalidArgumentException if the data types are not valid
+	 * @throws \RangeException if the data types are out of bounds (e.g., strings are too long, negative integers, etc)
+	 * @throws \TypeError if the data types violate the type hints
+	 * @throws \Exception if some other kind of exception occurs
+	 */
+	public function __construct(int $newUserId = null, string $newUserEmail, int $newUserLevel, string $newUserName, int $newUserProducts, int $newUserReviews, string $newUserSalt, string $newUserHash) {
+		try{
+			$this->setUserId($newUserId);
+			$this->setUserEmail($newUserEmail);
+			$this->setUserLevel($newUserLevel);
+			$this->setUserName($newUserName);
+			$this->setUserProducts($newUserProducts);
+			$this->setUserReviews($newUserReviews);
+			$this->setUserSalt($newUserSalt);
+			$this->setUserHash($newUserHash);
+		} catch (\InvalidArgumentException $invalidArgument) {
+			//rethrow the exception to the caller
+			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
+		} catch (\RangeException $range) {
+			//rethrow the exception to the caller
+			throw(new \RangeException($range->getMessage(), 0, $range));
+		} catch (\TypeError $typeError) {
+			//rethrow the exception to the caller
+			throw(new \TypeError($typeError->getMessage(), 0, $typeError));
+		} catch(\Exception $exception) {
+			//rethrow the exception to the caller
+			throw(new \Exception ($exception->getMessage(), 0, $exception));
+		}
+	}
 	/**
 	 *accessor method for user id
 	 *
@@ -159,8 +198,8 @@ class User implements \JsonSerializable {
 	 */
 	public function setUserName(string $newUserName) {
 		//verify the username is valid and/or secure
-		$newUserName = trim($newUserName);//need to leave space in the characters trimmed EDIT
-		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING);
+		$newUserName = trim($newUserName, "\t\n\r\0\x0B"); //CHECK THIS AGAINST BOOK
+		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newUserName) === true){
 			throw(new \InvalidArgumentException("Username is empty or is insecure"));
 		}
@@ -239,12 +278,14 @@ class User implements \JsonSerializable {
 	 * mutator method for user salt
 	 *
 	 * @param string $newUserSalt new value for user salt
-	 * @throws \RangeException if $newUserSalt is longer than 64 characters
+	 * @throws \RangeException if $newUserSalt is the wrong length
 	 */
 	public function setUserSalt(string $newUserSalt) {
-		//verify that the hash will fit in the database
-		if(strlen($newUserSalt) > 64){
-			throw(new \RangeException("Salt is too long"));
+		//verify that the salt contains valid characters
+		$newUserSalt=ctype_xdigit($newUserSalt);
+		//verify that the salt is of correct length
+		if(strlen($newUserSalt) !== 64){
+			throw(new \RangeException("Salt is wrong length"));
 		}
 
 		//store the salt
@@ -264,15 +305,28 @@ class User implements \JsonSerializable {
 	 * mutator method for user hash
 	 *
 	 * @param string $newUserHash new value for user hash
-	 * @throws \RangeException is $newUserHash is longer than 128 characters
+	 * @throws \RangeException is $newUserHash is the wrong length
 	 */
 	public function setUserHash(string $newUserHash){
-		//verify that the hash will fit in the database
-		if(strlen($newUserHash) > 128){
-			throw(new \RangeException("Hash is too large"));
+		//verify that the hash contains valid characters
+		$newUserHash=ctype_xdigit($newUserHash);
+		//verify that the hash is of the correct length
+		if(strlen($newUserHash) !== 128){
+			throw(new \RangeException("Hash is wrong length"));
 		}
 
 		//store the hash
 		$this->userHash = $newUserHash;
+	}
+	/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting in state variables to serialize
+	 */
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		Unset($fields["userSalt"]);
+		Unset ($fields["userHash"]);
+		return($fields);
 	}
 }
