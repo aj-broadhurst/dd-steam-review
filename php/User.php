@@ -305,7 +305,7 @@ class User implements \JsonSerializable {
 	 * mutator method for user hash
 	 *
 	 * @param string $newUserHash new value for user hash
-	 * @throws \RangeException is $newUserHash is the wrong length
+	 * @throws \RangeException if $newUserHash is the wrong length
 	 */
 	public function setUserHash(string $newUserHash){
 		//verify that the hash contains valid characters
